@@ -11,22 +11,24 @@ private:
     int                 _fix;
     static const int    _fract;
 public:
-    Fixed();
-    Fixed(int i);
-    Fixed(float f);
-    Fixed(Fixed const &f);
-    ~Fixed();
+    Fixed();                            // A default constructor;
+    Fixed(int i);                       // Integer constructor;
+    Fixed(float f);                     // Floating point constructor;
+    Fixed(Fixed const &f);              // A copy constructor;
+    ~Fixed();                           // A destructor;
     int getRawBits( void ) const;
     void setRawBits( int const raw );
     float toFloat( void ) const;
     int toInt( void ) const;
 
-    // static & Fixed min();
-    // static & Fixed max(Fixed a, Fixed b);
-    Fixed& operator++();
-    Fixed& operator--();
-    Fixed operator++(int);
-    Fixed operator--(int);
+    static Fixed &max(Fixed &f1, Fixed &f2);
+    static Fixed &min(Fixed &f1, Fixed &f2);
+    const static Fixed &max(Fixed const &f1, Fixed const &f2);
+    const static Fixed &min(Fixed const &f1, Fixed const &f2);
+    Fixed& operator++();            //prefix increment
+    Fixed& operator--();            //prefix decrement
+    Fixed operator++(int);          //postfix increment
+    Fixed operator--(int);          //postfix decrement
 
     Fixed& operator=(Fixed const &f);
     Fixed operator+(Fixed const &f);
