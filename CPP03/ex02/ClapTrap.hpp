@@ -5,7 +5,7 @@
 
 class ClapTrap
 {
-private:
+protected:
     std::string     _name;
     unsigned int    _hitpoints;
     unsigned int    _energyPoints;
@@ -20,7 +20,8 @@ public:
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
     std::string getName(void);
-    void initAttribs(void);
+    void initAttribs(unsigned int p1, unsigned int p2, unsigned int p3);
+    void setName(std::string name);
 };
 
 

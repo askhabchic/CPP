@@ -1,18 +1,15 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap()    {
-    std::cout << "Default constructor called" << std::endl;
-    _name = "name";
-    _hitpoints = 10;
-    _energyPoints = 10;
-    _attackDamage = 0;
+    _name = "Clap";
+    initAttribs();
+    std::cout << "Default constructor called for ClapTrap <" << _name << ">.\n";
 }
 
 ClapTrap::ClapTrap(std::string name){
     this->_name = name;
-    this->_hitpoints = 10;
-    this->_energyPoints = 10;
-    this->_attackDamage = 0;
+    initAttribs();
+    std::cout << "Named constructor called for ClapTrap <" << _name << ">.\n";
 }
 
 ClapTrap::ClapTrap(ClapTrap &clap){
@@ -26,26 +23,39 @@ ClapTrap & ClapTrap::operator=(ClapTrap const &clap)    {
     return *this;   }
 
 ClapTrap::~ClapTrap()   {
-    std::cout << "Destructor called" << std::endl;  }
+    std::cout << "\nDestructor called and destroyed <" << _name << ">.\n";  }
 
 void    ClapTrap::attack(std::string const & target){
-    if (!_energyPoints)
-        _energyPoints -= 1;
-    std::cout << "ClapTrap <" << _name << "> attack <" << target \
-    << ">, causing <" << _attackDamage << "> points of damage!\n";
+    if (_energyPoints != 0)
+        this->_energyPoints -= 2;
+    this->_hitpoints += 1;
+    std::cout << "\nClapTrap <" << _name << "> attack <" << target \
+    << ">, causing (" << 2 << ") points of damage!\n";
+    std::cout << "<" << _name << "> spent (" << 2 << ") [energy points] to attack and now [energy points] = ("\
+    << this->_energyPoints << ").\n";
+    std::cout << "<" << _name << "> got (1) [hit point] per attack and now [his points] = (" << _hitpoints << ").\n\n";
  }
 
 void   ClapTrap::takeDamage(unsigned int amount){
-    _hitpoints -= amount;
-    _attackDamage++;
-    // _energyPoints -= amount;
-    std::cout << _name << " damaged " << _attackDamage << std::endl;
+    _hitpoints -= 1;
+    _energyPoints -= amount;
+    _attackDamage += amount;
+    std::cout << "ClapTrap <" << _name << "> was attacked and lost (1) [hit Point] = (" << amount \
+    << ") [energy Points]. Now his [hit Points] = (" << _hitpoints << ") and [energy Points] = (" << _energyPoints << ").\n";
+    std::cout << "ClapTrap <" << _name << "> damaged and now his [attack damage] = (" << _attackDamage << ").\n";
 }
 
 void    ClapTrap::beRepaired(unsigned int amount){
-    // _energyPoints += amount;
-    _hitpoints += amount;
-    std::cout << _name << " energy point increased by " << amount << " and now energy points = " << _energyPoints << std::endl;
-    std::cout << _name << " hitpoint increased by " << amount << " and now hitpoints = " << _hitpoints << std::endl;
+    _energyPoints += amount;
+    std::cout << "\nClapTrap <" << _name << "> [energy Points] increased by (" << amount << ") and now his [energy Points] = (" << _energyPoints << ").\n";
+}
 
+std::string ClapTrap::getName(){
+    return this->_name;
+}
+
+void ClapTrap::initAttribs(void){
+    this->_hitpoints = 10;
+    this->_energyPoints = 10;
+    this->_attackDamage = 0;
 }

@@ -1,8 +1,10 @@
 #include "ClapTrap.hpp"
 
 int main(){
-    ClapTrap Clap("Tom");
-    Clap.attack("target");
+    ClapTrap Tom("Tom");
+    ClapTrap Clap;
+    Tom.attack(Clap.getName());
     Clap.takeDamage(5);
+    Tom.beRepaired(2);
     Clap.beRepaired(2);
 }
