@@ -17,7 +17,6 @@ int main()
 
     for (int i = 0; i < 4; ++i)
         delete array[i];
-
     Dog basic;
     {
         Dog tmp = basic;
