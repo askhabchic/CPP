@@ -29,9 +29,9 @@ int     Span::shortestSpan(){
         throw impossibleSpan();
     std::vector<int>sortV = this->_vect;
     std::sort(sortV.begin(), sortV.end());
-    int diff = std::numeric_limits<int>::max();
+    unsigned int diff = std::numeric_limits<unsigned int>::max();
     for (unsigned int i = 0; i < sortV.size() - 1; ++i)
-        if (sortV[i+1] - sortV[i] < diff)
+        if (static_cast<unsigned int>(sortV[i+1] - sortV[i]) < diff)
             diff = sortV[i + 1] - sortV[i];
     return diff;
 }
@@ -39,7 +39,7 @@ int     Span::shortestSpan(){
 int     Span::longestSpan(){
     if (!_vect.size() || _vect.size() == 1)
         throw impossibleSpan();
-    std::vector<int>_sortV = this->_vect;
-    std::sort(_sortV.begin(), _sortV.end());
-    return _sortV.back() - _sortV.front();
+    std::vector<int>sortV = this->_vect;
+    std::sort(sortV.begin(), sortV.end());
+    return static_cast<unsigned int>(sortV.end() - sortV.begin());
 }
